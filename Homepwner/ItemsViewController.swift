@@ -52,11 +52,13 @@ class ItemsViewController: UITableViewController {
         tableView.contentInset = inset
         tableView.scrollIndicatorInsets = inset
         
-//        tableView.rowHeight = 65
-        tableView.rowHeight = UITableView.automaticDimension
-        tableView.estimatedRowHeight = 65
-        // Do any additional setup after loading the view.
+        tableView.rowHeight = 65
+//        tableView.rowHeight = UITableView.automaticDimension
+//        tableView.estimatedRowHeight = 65
     }
+    
+    
+    //MARK: tableView
     
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete{
@@ -98,7 +100,7 @@ class ItemsViewController: UITableViewController {
         //Item을 가지고 셀을 지정한다.
         cell.nameLabel.text = item.name
         cell.serialLabel.text = item.serialNumber
-        cell.valueLabel.text = "\(item.valueInDollars)"
+        cell.valueLabel.text = "$\(item.valueInDollars)"
         
         
         return cell
@@ -107,5 +109,18 @@ class ItemsViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
         //모델을 업데이트
         itemStore.moveItemAtIndex(fromIndex: sourceIndexPath.row, toIndex: destinationIndexPath.row)
+    }
+    
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "ShowItem"{
+            //방금 어느 행이 눌렸는지 계산
+            if let row = tableView.indexPathForSelectedRow?.row {
+                //이 행에 연결된 item을 가져와서 전달한다.
+                let item = itemStore.allItems[row]
+                let detailViewController = segue.destination as! DetailViewController
+                detailViewController.item = item
+            }
+        }
     }
 }
