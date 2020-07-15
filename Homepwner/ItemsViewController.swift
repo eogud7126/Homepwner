@@ -51,14 +51,29 @@ class ItemsViewController: UITableViewController {
         let inset = UIEdgeInsets(top: statusBarHeight, left: 0, bottom: 0, right: 0 )
         tableView.contentInset = inset
         tableView.scrollIndicatorInsets = inset
+        
+//        tableView.rowHeight = 65
+        tableView.rowHeight = UITableView.automaticDimension
+        tableView.estimatedRowHeight = 65
         // Do any additional setup after loading the view.
     }
     
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete{
             let item = itemStore.allItems[indexPath.row]
-            itemStore.removeItem(item: item)
-            tableView.deleteRows(at: [indexPath], with: .automatic)
+            let title = "Delete \(item.name)?"
+            let message = "Are you sure to delete this item?"
+            let ac = UIAlertController(title: title, message: message, preferredStyle: .actionSheet)
+            let cancelAction = UIAlertAction(title: "Cancel", style: .cancel,handler: nil)
+            ac.addAction(cancelAction)
+            let deleteAction = UIAlertAction(title: "Delete", style: .destructive, handler: { (action) -> Void in
+                self.itemStore.removeItem(item: item)
+                self.tableView.deleteRows(at: [indexPath], with: .automatic)
+            })
+            ac.addAction(deleteAction)
+            
+            //알림창 컨트롤러를 표시한다.
+            present(ac,animated: true,completion: nil)
         }
     }
 
@@ -69,15 +84,28 @@ class ItemsViewController: UITableViewController {
         // 기본 모양을 가진 UITableViewCell 인스턴스 생성
 //        let cell = UITableViewCell(style: .value1, reuseIdentifier: "UITableViewCell")
         //재사용 셀이나 새로운 셀을 얻는다
-        let cell = tableView.dequeueReusableCell(withIdentifier: "UITableViewCell", for: indexPath)
+//        let cell = tableView.dequeueReusableCell(withIdentifier: "UITableViewCell", for: indexPath)
+        
+        let cell = tableView.dequeueReusableCell(withIdentifier: "ItemCell", for: indexPath) as! ItemCell
+        
         
         //물품 배열의 n번째에 있는 항목의 설명을 n과 row와 일치하는 셀의 텍스트로 설정한다.
         //이 셀은 테이블 뷰의 n번째 행에 나타난다.
         let item = itemStore.allItems[indexPath.row]
         
-        cell.textLabel?.text = item.name
-        cell.detailTextLabel?.text = "$\(item.valueInDollars)"
+//        cell.textLabel?.text = item.name
+//        cell.detailTextLabel?.text = "$\(item.valueInDollars)"
+        //Item을 가지고 셀을 지정한다.
+        cell.nameLabel.text = item.name
+        cell.serialLabel.text = item.serialNumber
+        cell.valueLabel.text = "\(item.valueInDollars)"
+        
         
         return cell
+    }
+    
+    override func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+        //모델을 업데이트
+        itemStore.moveItemAtIndex(fromIndex: sourceIndexPath.row, toIndex: destinationIndexPath.row)
     }
 }

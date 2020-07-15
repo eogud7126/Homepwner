@@ -17,6 +17,7 @@
 		CE333DF724BB386000FBBF9F /* ItemsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE333DF624BB386000FBBF9F /* ItemsViewController.swift */; };
 		CE333DF924BB3C1100FBBF9F /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE333DF824BB3C1100FBBF9F /* Item.swift */; };
 		CE333DFB24BB403000FBBF9F /* ItemStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE333DFA24BB403000FBBF9F /* ItemStore.swift */; };
+		CEB34ED124BF375D005EF733 /* ItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB34ED024BF375D005EF733 /* ItemCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +54,7 @@
 		CE333DF624BB386000FBBF9F /* ItemsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemsViewController.swift; sourceTree = "<group>"; };
 		CE333DF824BB3C1100FBBF9F /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 		CE333DFA24BB403000FBBF9F /* ItemStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemStore.swift; sourceTree = "<group>"; };
+		CEB34ED024BF375D005EF733 /* ItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -108,6 +110,7 @@
 				CE333DC624BB310500FBBF9F /* AppDelegate.swift */,
 				CE333DC824BB310500FBBF9F /* SceneDelegate.swift */,
 				CE333DF624BB386000FBBF9F /* ItemsViewController.swift */,
+				CEB34ED024BF375D005EF733 /* ItemCell.swift */,
 				CE333DCC24BB310500FBBF9F /* Main.storyboard */,
 				CE333DCF24BB310600FBBF9F /* Assets.xcassets */,
 				CE333DD124BB310600FBBF9F /* LaunchScreen.storyboard */,
@@ -267,6 +270,7 @@
 			files = (
 				CE333DF924BB3C1100FBBF9F /* Item.swift in Sources */,
 				CE333DF724BB386000FBBF9F /* ItemsViewController.swift in Sources */,
+				CEB34ED124BF375D005EF733 /* ItemCell.swift in Sources */,
 				CE333DC724BB310500FBBF9F /* AppDelegate.swift in Sources */,
 				CE333DFB24BB403000FBBF9F /* ItemStore.swift in Sources */,
 				CE333DC924BB310500FBBF9F /* SceneDelegate.swift in Sources */,
